@@ -6,7 +6,7 @@ It consists of three interlinked sets of code:
 
 1) an implementation of power rankings (cf Massey) for correctly scheduled roller derby tournaments
 
-2) a maximum-weight, maximum-width matching algorithm for generating "optimal" matches for competitors
+2) a maximum-weight, maximum-cardinality matching algorithm for generating "optimal" matches for competitors
 
 3) a block scheduler for placement of matches in a round so as to provide minimum interference
 
