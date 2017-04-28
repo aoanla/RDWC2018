@@ -198,9 +198,12 @@ def pair_round(teams, amalfi, tsp=False):
 	return pairs
 
 #TEST here (amalfi dist 4)
+# Note: for *even* teams N, then the odd and even rounds have the same number of games (=N/2)
+#	for *odd* teams N+1, then the odd rounds (mw-match) have N/2 games, and even rounds (tsp) have (N/2)+1
+# (For odd teams, it makes more sense to think of each pair of rounds as a single unit, for scheduling purposes.)
 
 #eg for 6 round version, with Fontes pairs 
-print pair_round(teams,7, False)
+print pair_round(teams,7, False) 
 print pair_round(teams,6, True) #need this for ratings to be possible
 
 #calc_rating
