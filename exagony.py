@@ -1,6 +1,6 @@
 
 
-teamnames = ["Indigenous","Argentina","Australia","Belgium","Brazil","Canada","Chile","Colombia","Denmark","England","Finland","France","Germany","Greece","Ireland","Italy","Japan","Mexico","Netherlands","New Zealand","Norway","Portugal","Puerto Rico","Scotland","South Africa","Spain","Sweden","Switzerland","Wales","West Indies","United States","Korea","Iceland","Philippines","Romania","Czech Republic","Costa Rica","Iran","Russia","Austria"]
+teamnames = ["Indigenous","Argentina","Australia","Belgium","Brazil","Canada","Denmark","England","Finland","France","Germany","Greece","Ireland","Italy","Japan","Mexico","Netherlands","New Zealand","Norway","Portugal","Scotland","South Africa","Spain","Sweden","Switzerland","Wales","West Indies","United States","Korea","Iceland","Philippines","Romania","Czech Republic","Costa Rica","Iran","Russia","Austria", "Poland"]
 
 #adjacencies
 adj = {}
@@ -8,20 +8,20 @@ adj = {}
 for i in teamnames:
 	adj[i] = []
 
-pairs = [("Argentina","Chile"),
+pairs = [
 ("Argentina","Brazil"),
 ("Australia","New Zealand"),
 ("United States","Canada"),
 ("United States","Mexico"),
 ("United States","Korea"),
-("United States","Puerto Rico"),
+#("United States","Puerto Rico"),
+("Indigenous","Canada"),
+("Indigenous","Mexico"),
+("Indigenous","Korea"),
+#("Indigenous","Puerto Rico"),
 ("Belgium","France"),
 ("Belgium","Netherlands"),
 ("Belgium","Germany"),
-("Brazil","Colombia"),
-("Chile","Colombia"),
-("Colombia","Costa Rica"),
-("Colombia","Mexico"),
 ("Denmark","Germany"),
 ("Denmark","Norway"),
 ("Denmark","Sweden"),
@@ -55,7 +55,10 @@ pairs = [("Argentina","Chile"),
 ("Portugal","Spain"),
 ("Scotland","Wales"),
 ("Sweden","Russia"),
-("Switzerland","Austria")]
+("Switzerland","Austria"),
+("Poland", "Czech Republic"),
+("Poland", "Germany"),
+("Poland", "Romania") ]
 
 #add pairs (adjacency is symmetric)
 for i in pairs: 
@@ -67,15 +70,15 @@ regionmask = 0x0
 masks = { i:0x0 for i in teamnames}
 
 #LA mask = 0x1
-for i in ["Argentina","Brazil","Chile","Colombia","Mexico", "Costa Rica"]:
+for i in ["Argentina","Brazil","Mexico", "Costa Rica"]:
 	masks[i] = masks[i] | 0x1
 
 #NA mask = 0x2
-for i in ["United States", "Korea", "Canada", "Mexico", "Puerto Rico", "Costa Rica", "Philippines"]:
+for i in ["United States", "Korea", "Canada", "Mexico", "Costa Rica", "Philippines"]:
 	masks[i] = masks[i] | 0x2
 
 #EURO mask = 0x4
-for i in ["Belgium","Denmark","England","Finland","France","Germany","Greece","Ireland","Italy","Netherlands","Norway","Portugal","Scotland","Spain","Sweden","Switzerland","Wales","Iceland","Romania","Czech Republic","Russia","Austria"]:
+for i in ["Belgium","Denmark","England","Finland","France","Germany","Greece","Ireland","Italy","Netherlands","Norway","Portugal","Scotland","Spain","Sweden","Switzerland","Wales","Iceland","Romania","Czech Republic","Russia","Austria", "Poland"]:
 	masks[i] = masks[i] | 0x4
 
 #PACIFIC mask = 0x8
@@ -92,9 +95,9 @@ for i in ["Australia","New Zealand","Japan"]:
 def get_exagony_dist(team1, team2):
 	#teams are adjacent
 	if team2 in adj[team1]:
-		return 0
+		return 5
 	#teams share a region
 	if masks[team1] & masks[team2]:
-		return 1
+		return 3
 	#teams share neither adjacency or region
-	return 2
+	return 0
